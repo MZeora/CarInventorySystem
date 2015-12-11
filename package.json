@@ -1,0 +1,19 @@
+{
+  "name": "carDB",
+  "version": "0.0.0",
+  "description": "An Automobile Database and simple IO for it.",
+  "main": "app.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^1.4.2",
+    "cookie-parser": "^1.4.0",
+    "ejs": "^2.3.3",
+    "express": "^4.13.3",
+    "express-session": "^1.11.3",
+    "lodash": "^3.10.1",
+    "moment": "^2.10.6",
+    "mongodb": "^2.0.43",
+    "numeral": "^1.5.3"
+  }
+}

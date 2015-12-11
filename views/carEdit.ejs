@@ -1,0 +1,293 @@
+<% include header.ejs %>
+<div class="row">
+	<div class="col-md-12">
+		<form action="/cars/edit/<%=car._id%>" method="post" enctype="multipart/form-data">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label class="sr-only">Purchase Date</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-calendar"></span></div>
+						<input class="form-control aDate" name="purchaseDate" type="text" placeholder="Purchase Date" <%
+							if(_.has(car,"purchaseDate")){
+								%>value="<%=moment(car.purchaseDate).format("YYYY-MM-DD")%>" <%
+							}
+						%>/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Year</label>
+					<input class="form-control" name="year" type="number" placeholder="Year" <%
+							if(_.has(car,"year")){
+								%>value="<%=car.year%>" <%
+							}
+						%>/>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Make</label>
+					<input class="form-control" name="make" type="text" placeholder="Make" <%
+							if(_.has(car,"make")){
+								%>value="<%=car.make%>" <%
+							}
+						%>/>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Model</label>
+					<input class="form-control" name="model" type="text" placeholder="Model" <%
+							if(_.has(car,"model")){
+								%>value="<%=car.model%>" <%
+							}
+						%>/>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Mileage</label>
+					<input class="form-control" name="milage" type="number" placeholder="Mileage" <%
+							if(_.has(car,"milage")){
+								%>value="<%=car.milage%>" <%
+							}
+						%>/>
+				</div>
+				<div class="form-group">
+					<label>State:</label>
+					<select name="state" class="form-control" placeholder="None">
+						<option value="">None</option>
+						<% _.forEach(stateList,function(value,key){	
+						%><option<% if(_.has(car,"state") && key == car.state){ %> selected<% } %> value="<%=key%>"><%=value%></option><%
+						}); %>
+					</select>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">License #</label>
+					<input class="form-control" name="lincense" type="text" placeholder="License #" <%
+							if(_.has(car,"lincense")){
+								%>value="<%=car.lincense%>" <%
+							}
+						%>/>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">VIN #</label>
+					<input class="form-control" name="vin" type="text" placeholder="VIN #" <%
+							if(_.has(car,"vin")){
+								%>value="<%=car.vin%>" <%
+							}
+						%>/>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Color</label>
+					<input class="form-control" name="color" type="text" placeholder="Color" <%
+							if(_.has(car,"color")){
+								%>value="<%=car.color%>" <%
+							}
+						%>/>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Body Type</label>
+					<input class="form-control" name="body" type="text" placeholder="Body Type" <%
+							if(_.has(car,"body")){
+								%>value="<%=car.body%>" <%
+							}
+						%>/>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Engine Size</label>
+					<input class="form-control" name="engine" type="text" placeholder="Engine Size" <%
+							if(_.has(car,"engine")){
+								%>value="<%=car.engine%>" <%
+							}
+						%>/>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Transmission</label>
+					<input class="form-control" name="transmission" type="text" placeholder="Transmission" <%
+							if(_.has(car,"transmission")){
+								%>value="<%=car.transmission%>" <%
+							}
+						%>/>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+					<label class="sr-only">Open Date</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-calendar"></span></div>
+						<input class="form-control aDate" name="openDate" type="input" placeholder="Open Date"  <%
+							if(_.has(car,"openDate")){
+								%>value="<%=moment(car.openDate).format("YYYY-MM-DD")%>" <%
+							}
+						%>/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Close Date</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-calendar"></span></div>
+						<input class="form-control aDate" name="closeDate" type="input" placeholder="Close Date"  <%
+							if(_.has(car,"closeDate")){
+								%>value="<%=moment(car.closeDate).format("YYYY-MM-DD")%>" <%
+							}
+						%>/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Initial Cost</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-usd"></span></div>
+						<input class="form-control" name="initCost" type="number" placeholder="Initial Cost" <%
+							if(_.has(car,"initCost")){
+								%>value="<%=car.initCost%>" <%
+							}
+						%>/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Repairs Costs</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-usd"></span></div>
+						<input class="form-control" name="repairs" type="number" placeholder="Repairs" <%
+							if(_.has(car,"repairs")){
+								%>value="<%=car.repairs%>" <%
+							}
+						%>/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Detail Costs</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-usd"></span></div>
+						<input class="form-control" name="detail" type="number" placeholder="Detail" <%
+							if(_.has(car,"detail")){
+								%>value="<%=car.detail%>" <%
+							}
+						%>/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Fuel Costs</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-usd"></span></div>
+						<input class="form-control" name="fuel" type="number" placeholder="Fuel" <%
+							if(_.has(car,"fuel")){
+								%>value="<%=car.fuel%>" <%
+							}
+						%>/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Transport Costs</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-usd"></span></div>
+						<input class="form-control" name="transport" type="number" placeholder="Transport" <%
+							if(_.has(car,"transport")){
+								%>value="<%=car.transport%>" <%
+							}
+						%>/>
+					</div>					
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Marketing &amp; Advertising Costs</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-usd"></span></div>
+						<input class="form-control" name="marketing" type="number" placeholder="Marketing &amp; Advertising" <%
+							if(_.has(car,"marketing")){
+								%>value="<%=car.marketing%>" <%
+							}
+						%>/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Acquisition Fee</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-usd"></span></div>
+						<input class="form-control" name="acquisition" type="number" placeholder="Acquisition Fee" <%
+							if(_.has(car,"acquisition")){
+								%>value="<%=car.acquisition%>" <%
+							}
+						%>/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">State Fees</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-usd"></span></div>
+						<input class="form-control" name="stateFees" type="number" placeholder="State Fees" <%
+							if(_.has(car,"stateFees")){
+								%>value="<%=car.stateFees%>" <%
+							}
+						%>/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Misc Costs</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-usd"></span></div>
+						<input class="form-control" name="misc" type="number" placeholder="Misc" <%
+							if(_.has(car,"misc")){
+								%>value="<%=car.misc%>" <%
+							}
+						%>/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Sales Price</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-usd"></span></div>
+						<input class="form-control" name="salesPrice" type="number" placeholder="Sales Price" <%
+							if(_.has(car,"salesPrice")){
+								%>value="<%=car.salesPrice%>" <%
+							}
+						%>/>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="panel">
+					<div class="panel-heading"><h4>Pictures</h4></div>
+					<div class="panel-body">
+						<p><strong>Touch/Click the images to Remove them.</strong></p>
+						<div class="well well-sm clearfix">
+							<% if(_.has(car,"pictures")){ _.forEach(car.pictures,function(imgPath,index){ %>
+								<div class="removeImage"><img alt="picture #<%=index+1%>" src="<%=imgPath.substr(6)%>" class="img-responsive img-rounded" style="max-width:140px; margin-bottom:5px;" /><input type="hidden" name="pictures[]" value="<%=imgPath%>" /></div>
+							<% }) } else { %><span>No Pictures Found.</span><% } %>
+						</div>
+
+						<span class="btn btn-default" id="addPicture" style="margin-bottom:5px">Add Another Image</span>
+						<div class="well well-sm picture">
+							<span class="btn btn-default btn-file">Browse...<input type="file" name="picture" /></span><span class="filenameInput">&nbsp;<strong></strong></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<input name="submit" type="submit" class="btn btn-success" />
+			<a href="/cars" class="btn btn-danger">Cancel</a>
+		</form>
+	</div>
+</div>
+<script>
+	$(document).ready(function(){
+		$(".aDate").datepicker({
+			"goToCurrent":true,
+			"dateFormat":"yy-mm-dd"
+		});
+
+		var cloneElement = $(".picture")[0].outerHTML;
+
+		$(".removeImage").click(function(){
+			$(this).toggle();
+
+			var count = $(this).parent().children().length;
+			if(count <= 1){
+				$(this).parent().append("<span>All Previous Images To Be Removed.</span>")
+			}
+			$(this).remove();
+		});
+
+		$("#addPicture").click(function(){
+			$(".panel-body").append(cloneElement);
+		});
+
+		$(".panel-body").delegate("input[type='file']","change",function(event){
+			console.log(event.target.value);
+			$(this).parent().next(".filenameInput").find("strong").html(event.target.value);			
+		});
+	});
+</script>
+<% include footer.ejs %>

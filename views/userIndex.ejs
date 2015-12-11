@@ -1,0 +1,27 @@
+<% include header.ejs %>
+<div class="row">
+	<div class="col-md-12">
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Username</th>
+						<th>Activated</th>
+						<th colspan=2>Functions</th>
+					</tr>
+				</thead>
+				<tbody>
+				<% _.forEach(users,function(userdata){ %>
+					<tr>
+						<td><%=userdata.username%></td>
+						<td><%=userdata.isActive%></td>
+						<td><a href="/users/activate/<%=userdata._id%>" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span> Toggle Activation</a></td>
+						<td><a href="/users/delete/<%=userdata._id%>" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-remove"></span> Delete</a></td>
+					</tr>
+				<% }); %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<% include footer.ejs %>

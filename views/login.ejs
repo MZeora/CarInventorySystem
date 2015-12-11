@@ -1,0 +1,15 @@
+				<% if(!authenticated){ %>
+				<form action="login" method="post" class="navbar-form navbar-right" style="margin:0">
+					<div class="form-group">
+						<label class="sr-only">Username</label>
+						<input class="form-control input-sm" name="username" type="text" placeholder="Username" />
+					</div>
+					<div class="form-group">
+						<label class="sr-only">Password</label>
+						<input class="form-control input-sm" name="password" type="password" placeholder="Password" />
+					</div>
+					<input name="submit" type="submit" class="btn btn-sm btn-success navbar-btn" value="Login" /> <a href="/register" class="btn btn-sm btn-primary">Register</a>
+				</form>
+				<% } else { %>
+					<p class="navbar-text navbar-right" style="margin:0"><strong><%=user.username%></strong> <a href="/logout" class="btn btn-sm btn-danger navbar-btn">Logout</a></p>
+				<% }%>

@@ -1,0 +1,237 @@
+<% include header.ejs %>
+<div class="row">
+	<div class="col-md-12">
+		<div class="well">
+			<span><strong>Items with a red star (<span class="glyphicon glyphicon-star" style="color:red"></span>) by it are required</strong></sspan>
+		</div>
+		<form id="insertForm" action="/cars/new" method="post" enctype="multipart/form-data">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label class="sr-only">Purchase Date Required</label>
+					<div class="input-group">
+						<div class="input-group-addon">
+							<span aira-hidden=true class="glyphicon glyphicon-star" style="color:red;"></span>
+						</div>
+						<div class="input-group-addon">
+							<span aira-hidden=true class="glyphicon glyphicon-calendar"></span>
+						</div>
+						<input class="form-control aDate requiredData" name="purchaseDate" type="text" placeholder="Purchase Date" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Year Required</label>
+					<div class="input-group">
+						<div class="input-group-addon">
+							<span aira-hidden=true class="glyphicon glyphicon-star" style="color:red;"></span>
+						</div>
+						<input class="form-control requiredData" name="year" type="number" placeholder="Year" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Make Required</label>
+					<div class="input-group">
+						<div class="input-group-addon">
+							<span aira-hidden=true class="glyphicon glyphicon-star" style="color:red;"></span>
+						</div>
+						<input class="form-control requiredData" name="make" type="text" placeholder="Make" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Model Required</label>
+					<div class="input-group">
+						<div class="input-group-addon">
+							<span aira-hidden=true class="glyphicon glyphicon-star" style="color:red;"></span>
+						</div>
+						<input class="form-control requiredData" name="model" type="text" placeholder="Model" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Mileage Required</label>
+					<div class="input-group">
+						<div class="input-group-addon">
+							<span aira-hidden=true class="glyphicon glyphicon-star" style="color:red;"></span>
+						</div>
+						<input class="form-control requiredData" name="milage" type="number" placeholder="Mileage" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label>State:</label>
+					<select name="state" class="form-control" placeholder="None">
+						<option value="">None</option>
+						<% _.forEach(stateList,function(value,key){	
+						%><option value="<%=key%>"><%=value%></option><%
+						}); %>
+					</select>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">License #</label>
+					<input class="form-control" name="lincense" type="text" placeholder="License #" />
+				</div>
+				<div class="form-group">
+					<label class="sr-only">VIN # Required</label>
+					<div class="input-group">
+						<div class="input-group-addon">
+							<span aira-hidden=true class="glyphicon glyphicon-star" style="color:red;"></span>
+						</div>
+						<input class="form-control requiredData" name="vin" type="text" placeholder="VIN #" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Color</label>
+					<input class="form-control" name="color" type="text" placeholder="Color" />
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Body Type</label>
+					<input class="form-control" name="body" type="text" placeholder="Body Type" />
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Engine Size</label>
+					<input class="form-control" name="engine" type="text" placeholder="Engine Size" />
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Transmission</label>
+					<input class="form-control" name="transmission" type="text" placeholder="Transmission" />
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+					<label class="sr-only">Open Date</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-calendar"></span></div>
+						<input class="form-control aDate" name="openDate" type="input" placeholder="Open Date" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Close Date</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-calendar"></span></div>
+						<input class="form-control aDate" name="closeDate" type="input" placeholder="Close Date" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Initial Cost Required</label>
+					<div class="input-group">
+						<div class="input-group-addon">
+							<span aira-hidden=true class="glyphicon glyphicon-star" style="color:red;"></span>
+						</div>
+						<div class="input-group-addon">
+							<span aira-hidden=true class="glyphicon glyphicon-usd"></span>
+						</div>
+						<input class="form-control requiredData" name="initCost" type="number" placeholder="Initial Cost" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Repairs Costs</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-usd"></span></div>
+						<input class="form-control" name="repairs" type="number" placeholder="Repairs" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Detail Costs</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-usd"></span></div>
+						<input class="form-control" name="detail" type="number" placeholder="Detail" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Fuel Costs</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-usd"></span></div>
+						<input class="form-control" name="fuel" type="number" placeholder="Fuel" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Transport Costs</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-usd"></span></div>
+						<input class="form-control" name="transport" type="number" placeholder="Transport" />
+					</div>					
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Marketing &amp; Advertising Costs</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-usd"></span></div>
+						<input class="form-control" name="marketing" type="number" placeholder="Marketing &amp; Advertising" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Acquisition Fee</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-usd"></span></div>
+						<input class="form-control" name="acquisition" type="number" placeholder="Acquisition Fee" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">State Fees</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-usd"></span></div>
+						<input class="form-control" name="stateFees" type="number" placeholder="State Fees" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Misc Costs</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-usd"></span></div>
+						<input class="form-control" name="misc" type="number" placeholder="Misc" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="sr-only">Sales Price</label>
+					<div class="input-group">
+						<div class="input-group-addon"><span aira-hidden=true class="glyphicon glyphicon-usd"></span></div>
+						<input class="form-control" name="salesPrice" type="number" placeholder="Sales Price" />
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="panel">
+					<div class="panel-heading"><span>Pictures</span></div>
+					<div class="panel-body">
+						<span class="btn btn-default" id="addPicture" style="margin-bottom:5px">Add Another Image</span>
+						<div class="well well-sm picture">
+							<span class="btn btn-default btn-file">Browse...<input type="file" name="picture" /></span><span class="filenameInput">&nbsp;<strong></strong></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<input name="submit" type="submit" class="btn btn-success" />
+		</form>
+	</div>
+</div>
+<script>
+	$(document).ready(function(){
+		$(".aDate").datepicker({
+			"goToCurrent":true,
+			"dateFormat":"yy-mm-dd"
+		});
+
+		var cloneElement = $(".picture")[0].outerHTML;
+
+		$("#addPicture").click(function(){
+			$(".panel-body").append(cloneElement);
+		});
+
+		$(".panel-body").delegate("input[type='file']","change",function(event){
+			console.log(event.target.value);
+			$(this).parent().next(".filenameInput").find("strong").html(event.target.value);			
+		});
+
+		$("#insertForm").on("submit",function(){
+			var isOK = true;
+
+			$("#insertForm .requiredData").each(function(){
+				if(_.isEmpty($(this).val())){
+					isOK = false;
+				}
+			});
+
+			if(!isOK){
+				alert("Required Elements not filled in.")
+			}
+
+			return isOK;
+		})
+	});
+</script>
+<% include footer.ejs %>

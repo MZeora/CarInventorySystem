@@ -1,0 +1,160 @@
+<% include header.ejs %>
+<div class="row">
+	<div class="panel">
+		<div class="panel-heading">Pictures</div>
+		<div class="panel-body">
+			<% if(_.has(car,"pictures")){ _.forEach(car.pictures,function(imgPath,index){ %>
+				<img alt="picture #<%=index+1%>" src="<%=imgPath.substr(6)%>" class="img-responsive img-rounded pull-left" style="max-width:140px; margin-right:5px;" />
+			<% }) } else { %><span>No Pictures Found.</span><% } %>
+		</div>
+	</div>
+</div>
+<script>
+	$(document).ready(function(){
+		$(".panel-body img").click(function(){
+			var maxWidth = $(this).css("max-width");
+			if(maxWidth != "140px"){
+				$(this).css("max-width","140px");
+			} else {
+				$(this).css("max-width","100%");
+			}
+		});
+	});
+</script>
+<div class="row">
+	<div class="col-md-4">
+		<table class="table table-striped">
+			<tr>
+				<th>Stock #</th>
+				<td><%=car._id%></td>
+			</tr>
+			<tr>
+				<th>Year, Make, Model</th>
+				<td><%=car.year%> <%=car.make%> <%=car.model%></td>
+			</tr>
+			<tr>
+				<th>Mileage</th>
+				<td><%=numeral(car.milage).format("0,0")%></td>
+			</tr>
+			<% if(_.has(car,"purchaseDate")){ %>
+			<tr>
+				<th>Purchase Date</th>
+				<td><%=moment(car.purchaseDate).format("MM-DD-YYYY")%></td>
+			</tr>
+			<% }
+			if(_.has(car,"openDate")){ %>
+			<tr>
+				<th>Open Date</th>
+				<td><%=moment(car.openDate).format("MM-DD-YYYY")%></td>
+			</tr>
+			<% }
+			if(_.has(car,"closeDate")){ %>
+			<tr>
+				<th>Close Date</th>
+				<td><%=moment(car.closeDate).format("MM-DD-YYYY")%></td>
+			</tr>
+			<% }
+			if(_.has(car,"state")){ %>
+			<tr>
+				<th>State</th>
+				<td><%=stateList[car.state]%> (<%=car.state%>)</td>
+			</tr>
+			<% }
+			if(_.has(car,"lincense")){ %>
+			<tr>
+				<th>License</th>
+				<td><%=car.lincense%></td>
+			</tr>
+			<% } %>
+			<tr>
+				<th>VIN #</th>
+				<td><%=car.vin%></td>
+			</tr>
+			<% if(_.has(car,"color")){ %>
+			<tr>
+				<th>Color</th>
+				<td><%=car.color%></td>
+			</tr>
+			<% }
+			if(_.has(car,"body")){ %>
+			<tr>
+				<th>Body</th>
+				<td><%=car.body%></td>
+			</tr>
+			<% }
+			if(_.has(car,"engine")){ %>
+			<tr>
+				<th>Engine</th>
+				<td><%=car.engine%></td>
+			</tr>
+			<% }
+			if(_.has(car,"transmission")){ %>
+			<tr>
+				<th>Transmission</th>
+				<td><%=car.transmission%></td>
+			</tr>
+			<% } %>
+		</table>
+	</div>
+	<div class="col-md-4">
+		<table class="table table-striped">
+			<% var price = 0; %>
+			<% if(_.has(car,"initCost")){ price += car.initCost; %>
+			<tr>
+				<th>Initial Cost</th>
+				<td><%=numeral(car.initCost).format("$0,0[.]00")%></td>
+			</tr>
+			<% } %>
+			<% _.forEach(['repairs','detail','fuel',
+						  'transport','marketing','acquisition',
+						  'stateFees','misc'],function(item){
+				if(_.has(car,item)){ price += car[item]; %>
+			<tr>
+				<th><% if(item == "stateFees"){ %>State Fees<% } else { %><%=item.charAt(0).toUpperCase()+item.substr(1)%> Costs<% } %></th>
+				<td><%=numeral(car[item]).format("$0,0[.]00")%></td>
+			</tr>
+			<% } }) %>
+			<% if(_.has(car,"salesPrice")){ %>
+			<tr>
+				<th>Sales Price</th>
+				<td><%=numeral(car.salesPrice).format("$0,0[.]00")%></td>
+			</tr>
+			<% } %>
+		</table>
+	</div>
+	<div class="col-md-4">
+		<p class="text-center"><strong>Calculated Numbers:</strong></p>
+		<table class="table table-striped">
+			<% if(_.has(car,"salesPrice")){ %>
+			<tr>
+				<th colspan=2>Profit</th>
+				<% var profit = car.salesPrice - price; %>
+				<td colspan=2<% if(profit < 0){ %> class="bg-danger"<% } %>><%=numeral(profit).format("$0,0[.]00")%></td>
+			</tr>
+			<% } %>
+			<tr>
+				<th colspan=2>Total Investement</th>
+				<td colspan=2><%=numeral(price).format("$0,0[.]00")%></td>
+			</tr>
+			<tr>
+				<th>Costs+10%</th>
+				<td><%=numeral(price+price*.1).format("$0,0[.]00")%></td>
+				<th>Profit Margin</th>
+				<td><%=numeral(price*.1).format("$0,0[.]00")%></td>
+			</tr>
+			<tr>
+				<th>Costs+30%</th>
+				<td><%=numeral(price+price*.3).format("$0,0[.]00")%></td>
+				<th>Profit Margin</th>
+				<td><%=numeral(price*.3).format("$0,0[.]00")%></td>
+			</tr>
+			<tr>
+				<th>Costs+50%</th>
+				<td><%=numeral(price+price*.5).format("$0,0[.]00")%></td>
+				<th>Profit Margin</th>
+				<td><%=numeral(price*.5).format("$0,0[.]00")%></td>
+			</tr>
+		</table>
+	</div>
+</div>
+<% include footer.ejs %>
